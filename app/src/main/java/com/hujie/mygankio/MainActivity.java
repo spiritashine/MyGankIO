@@ -38,12 +38,13 @@ public class MainActivity extends AppCompatActivity {
         String[] titles={"ALL","休息视频","ANDROID","IOS","拓展资源","前端","瞎推荐"};
         ArrayList<ContentFragment> fragments=new ArrayList<>();
         for (int i=0;i<7;i++){
-            fragments.add(new ContentFragment());
+            fragments.add(ContentFragment.getInsatance());
         }
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setTabTextColors(Color.GRAY,Color.BLACK);
         tabLayout.setSelectedTabIndicatorColor(Color.CYAN);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(fragments.size());
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),this,fragments,titles));
 
         //添加菜单项
