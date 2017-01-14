@@ -3,6 +3,7 @@ package com.hujie.mygankio;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -36,17 +37,23 @@ public class MainActivity extends AppCompatActivity {
 
         //设置TabLayout
         String[] titles={"ALL","休息视频","ANDROID","IOS","拓展资源","前端","瞎推荐"};
-        ArrayList<ContentFragment> fragments=new ArrayList<>();
+        ArrayList<Fragment> fragments=new ArrayList<>();
+
         for (int i=0;i<7;i++){
-            fragments.add(ContentFragment.getInsatance());
+            fragments.add(ContentFragment.getInsatance(i));
         }
+
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         tabLayout.setTabTextColors(Color.GRAY,Color.BLACK);
+
         tabLayout.setSelectedTabIndicatorColor(Color.CYAN);
-        tabLayout.setupWithViewPager(viewPager);
+
         viewPager.setOffscreenPageLimit(fragments.size());
+
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),this,fragments,titles));
 
+        tabLayout.setupWithViewPager(viewPager);
         //添加菜单项
         navigationBar.addItem(new BottomNavigationItem(R.drawable.toolbar_defaultwindow,"最新")).
                 addItem(new BottomNavigationItem(R.drawable.toolbar_edit_selectnone,"分类浏览")).

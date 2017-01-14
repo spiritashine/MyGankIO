@@ -15,10 +15,10 @@ import java.util.ArrayList;
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
     private Context context;
-    private ArrayList<ContentFragment> fragments;
+    private ArrayList<Fragment> fragments;
     private String[] titles;
 
-    public MyPagerAdapter(FragmentManager fm, Context context, ArrayList<ContentFragment> fragments, String[] titles) {
+    public MyPagerAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragments, String[] titles) {
         super(fm);
         this.context = context;
         this.fragments = fragments;
