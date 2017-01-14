@@ -9,16 +9,20 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
+import com.hujie.mygankio.utils.IApi;
+import com.hujie.mygankio.utils.NetUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,13 +32,14 @@ import retrofit2.Response;
  */
 
 public class ContentFragment extends LazyFragment {
+
     private IApi mIApi = NetUtils.GetInstance().GetApi();
     private Gson mGson=new Gson();
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
     private MyRecyclerViewAdapter mAdapter;
     private ArrayList<ResultsBean> data=new ArrayList<>();
-    private static int typeIndex;
+    private int typeIndex;
     static String[] types={"all","休息视频","Android" ,"iOS" ,"拓展资源" ,"前端","瞎推荐"};
 
     public static Fragment getInsatance(int i){
@@ -108,29 +113,30 @@ public class ContentFragment extends LazyFragment {
     }
 
     private void loadData(){
-        Call<BaseBean<List<ResultsBean>>> call = mIApi.listAll(types[typeIndex], 10, 1);
-        call.enqueue(new Callback<BaseBean<List<ResultsBean>>>() {
+        Call<ResponseBody> call = mIApi.listAll(types[typeIndex], 10, 1);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<BaseBean<List<ResultsBean>>> call, Response<BaseBean<List<ResultsBean>>> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 mRefreshLayout.setRefreshing(false);
 
                 try {
-                    JSONArray jsonArray = new JSONArray(response);
+                    JSONArray jsonArray=new JSONObject(response.body().string()).getJSONArray("results");
 
-                    for (int i=0;i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         String string = jsonArray.getString(i);
-                        data.add(mGson.fromJson(string,ResultsBean.class));
+                        data.add(mGson.fromJson(string, ResultsBean.class));
                     }
-
+                    Log.e("=========", "onResponse: "+data.size() );
                     mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
             @Override
-            public void onFailure(Call<BaseBean<List<ResultsBean>>> call, Throwable t) {
-                mRefreshLayout.setRefreshing(false);
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
         });
@@ -139,35 +145,31 @@ public class ContentFragment extends LazyFragment {
 
     private void addData(){
         int page=1;
-        Call<BaseBean<List<ResultsBean>>> call = mIApi.listAll(types[typeIndex], 10, ++page);
-        call.enqueue(new Callback<BaseBean<List<ResultsBean>>>() {
+        Call<ResponseBody> call = mIApi.listAll(types[typeIndex], 10, ++page);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<BaseBean<List<ResultsBean>>> call, Response<BaseBean<List<ResultsBean>>> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 mRefreshLayout.setRefreshing(false);
 
-                if (response==null){
-                    Toast.makeText(getContext(),"no more data",Toast.LENGTH_LONG).show();
-                }else {
+                try {
+                    JSONArray jsonArray=new JSONObject(response.body().string()).getJSONArray("results");
 
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            String string = jsonArray.getString(i);
-                            data.add(mGson.fromJson(string, ResultsBean.class));
-                        }
-
-                        mAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        String string = jsonArray.getString(i);
+                        data.add(mGson.fromJson(string, ResultsBean.class));
                     }
+
+                    mAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
             @Override
-            public void onFailure(Call<BaseBean<List<ResultsBean>>> call, Throwable t) {
-                mRefreshLayout.setRefreshing(false);
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }

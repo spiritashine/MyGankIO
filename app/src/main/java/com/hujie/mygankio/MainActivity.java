@@ -13,6 +13,7 @@ import android.view.Menu;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.hujie.mygankio.adapter.MyPagerAdapter;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,8 @@
-package com.hujie.mygankio;
+package com.hujie.mygankio.utils;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by hujie on 2017/1/14.
@@ -27,7 +28,7 @@ public class NetUtils {
 
     private NetUtils (){
          retrofit=new Retrofit.Builder().baseUrl(BASE_URL).
-                addConverterFactory(GsonConverterFactory.create()).
+                addConverterFactory(ScalarsConverterFactory.create()).
                 build();
     }
 

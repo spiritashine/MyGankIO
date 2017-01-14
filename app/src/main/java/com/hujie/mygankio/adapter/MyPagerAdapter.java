@@ -1,4 +1,4 @@
-package com.hujie.mygankio;
+package com.hujie.mygankio.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
