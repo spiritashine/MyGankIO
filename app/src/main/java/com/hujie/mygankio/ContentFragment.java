@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -40,6 +39,7 @@ public class ContentFragment extends LazyFragment {
     private MyRecyclerViewAdapter mAdapter;
     private ArrayList<ResultsBean> data=new ArrayList<>();
     private int typeIndex;
+    private int page=1;
     static String[] types={"all","休息视频","Android" ,"iOS" ,"拓展资源" ,"前端","瞎推荐"};
 
     public static Fragment getInsatance(int i){
@@ -48,6 +48,11 @@ public class ContentFragment extends LazyFragment {
         bundle.putInt("type",i);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.recyclerview;
     }
 
     @Override
@@ -88,8 +93,8 @@ public class ContentFragment extends LazyFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 //滑动到底部
-                if (newState==RecyclerView.SCROLL_STATE_IDLE&&
-                        lastVisibleItem==mAdapter.getItemCount()){
+                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
+                        lastVisibleItem+1 == mAdapter.getItemCount()){
                     if (!mRefreshLayout.isRefreshing()){
                         mRefreshLayout.setRefreshing(true);
                         addData();
@@ -126,7 +131,6 @@ public class ContentFragment extends LazyFragment {
                         String string = jsonArray.getString(i);
                         data.add(mGson.fromJson(string, ResultsBean.class));
                     }
-                    Log.e("=========", "onResponse: "+data.size() );
                     mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -144,7 +148,7 @@ public class ContentFragment extends LazyFragment {
     }
 
     private void addData(){
-        int page=1;
+
         Call<ResponseBody> call = mIApi.listAll(types[typeIndex], 10, ++page);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -174,8 +178,5 @@ public class ContentFragment extends LazyFragment {
         });
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.recyclerview;
-    }
+
 }

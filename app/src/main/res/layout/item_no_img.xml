@@ -7,14 +7,12 @@
         android:textColor="#000"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="8dp"
-        android:text="[译]Android Application启动流程分析"
         android:id="@+id/desc_noimg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:textSize="13sp"
         android:id="@+id/who_noimg"
-        android:text="lxxself"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="8dp"
         android:layout_below="@+id/desc_noimg"
@@ -23,7 +21,6 @@
     <TextView
         android:textSize="13sp"
         android:id="@+id/createdAt_noimg"
-        android:text="昨天"
         android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
         android:layout_marginRight="8dp"
