@@ -1,13 +1,17 @@
 package com.hujie.mygankio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
@@ -115,8 +119,26 @@ public class ContentFragment extends LazyFragment {
                 }
             }
         });
+
+        //recyclerView item的点击事件
+        mAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+                //得到点击条目的位置
+                int position = mRecyclerView.getChildAdapterPosition(view);
+                //通过位置得到url
+                String url = data.get(position).getUrl();
+                //跳转加载WebView
+                Intent intent = new Intent(getContext(),ContentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("url",url);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
+    //下拉刷新
     private void loadData(){
         Call<ResponseBody> call = mIApi.listAll(types[typeIndex], 10, 1);
         call.enqueue(new Callback<ResponseBody>() {
@@ -147,8 +169,8 @@ public class ContentFragment extends LazyFragment {
 
     }
 
+    //上拉加载
     private void addData(){
-
         Call<ResponseBody> call = mIApi.listAll(types[typeIndex], 10, ++page);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
