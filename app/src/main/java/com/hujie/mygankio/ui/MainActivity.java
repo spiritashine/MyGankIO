@@ -1,4 +1,4 @@
-package com.hujie.mygankio;
+package com.hujie.mygankio.ui;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -16,7 +16,9 @@ import android.view.MenuItem;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.hujie.mygankio.R;
 import com.hujie.mygankio.adapter.MyPagerAdapter;
+import com.hujie.mygankio.ui.ContentFragment;
 
 import java.util.ArrayList;
 

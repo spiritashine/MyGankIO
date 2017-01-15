@@ -4,7 +4,7 @@
     android:id="@+id/activity_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hujie.mygankio.ContentActivity">
+    tools:context="com.hujie.mygankio.ui.ContentActivity">
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"

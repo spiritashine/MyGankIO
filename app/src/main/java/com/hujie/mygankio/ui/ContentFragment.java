@@ -1,4 +1,4 @@
-package com.hujie.mygankio;
+package com.hujie.mygankio.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,14 +7,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hujie.mygankio.R;
 import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
+import com.hujie.mygankio.javabean.ResultsBean;
 import com.hujie.mygankio.utils.IApi;
 import com.hujie.mygankio.utils.NetUtils;
 

@@ -1,4 +1,4 @@
-package com.hujie.mygankio;
+package com.hujie.mygankio.ui;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

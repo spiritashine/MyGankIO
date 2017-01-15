@@ -1,4 +1,4 @@
-package com.hujie.mygankio;
+package com.hujie.mygankio.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 import android.widget.TextView;
+
+import com.hujie.mygankio.R;
 
 public class ContentActivity extends AppCompatActivity {
 
