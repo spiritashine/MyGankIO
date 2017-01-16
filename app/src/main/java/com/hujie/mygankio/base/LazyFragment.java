@@ -1,4 +1,4 @@
-package com.hujie.mygankio.ui;
+package com.hujie.mygankio.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
 
 /**
  * Created by hujie on 2017/1/13.
@@ -57,4 +59,11 @@ public abstract class LazyFragment extends Fragment {
     protected abstract void init(View view);
     @LayoutRes
     protected abstract int getLayoutId();
+
+    //内存空间不足时清除缓存
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        Glide.get(getContext()).clearMemory();
+    }
 }
