@@ -1,20 +1,12 @@
 package com.hujie.mygankio.base;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewStub;
-
-
 import com.hujie.mygankio.R;
-import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
-import com.hujie.mygankio.ui.ContentActivity;
-
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -35,6 +27,7 @@ public abstract class BaseListFragment extends LazyFragment {
 
     /**
      * 设置显示的Adapter
+     * 将RecyclerView传过去，用于点击事件获取childItemPosition
      *
      * @return RecycleView 显示的Adapter
      */
@@ -113,6 +106,8 @@ public abstract class BaseListFragment extends LazyFragment {
 
             }
         });
+
+        //预加载
         mSwipeRefreshLayout.setRefreshing(true);
         loadData();
     }

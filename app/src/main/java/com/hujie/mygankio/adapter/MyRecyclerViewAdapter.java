@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hujie.mygankio.R;
+import com.hujie.mygankio.base.TimeUtils;
 import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.ArrayList;
@@ -38,8 +39,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.listener=listener;
     }
 
-
-
     public MyRecyclerViewAdapter(Context context, ArrayList<ResultsBean> data) {
         this.context = context;
         this.data = data;
@@ -52,12 +51,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         //根据ViewType填充不同的布局
         if (viewType==MyRecyclerViewAdapter.NO_IMG){
             view=inflater.inflate(R.layout.item_no_img,parent,false);
-            NoImgViewHolder noImgViewHolder = new NoImgViewHolder(view);
-            return noImgViewHolder;
+            return new NoImgViewHolder(view);
         }else {
             view=inflater.inflate(R.layout.item_with_img,parent,false);
-            ImgViewHolder imgViewHolder = new ImgViewHolder(view);
-            return imgViewHolder;
+            return new ImgViewHolder(view);
         }
     }
 
@@ -69,14 +66,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ((NoImgViewHolder) holder).who_no_img.setText("var "+bean.getWho());
             //获取显示的时间
             String createdAt = bean.getCreatedAt();
-            String time = getTime(createdAt);
+            String time = TimeUtils.getTime(createdAt);
             ((NoImgViewHolder) holder).createdAt_no_img.setText(time);
         }else if (holder instanceof ImgViewHolder){
             ((ImgViewHolder) holder).desc_img.setText(bean.getDesc());
             ((ImgViewHolder) holder).who_img.setText("var "+bean.getWho());
             //获取显示的时间
             String createdAt = bean.getCreatedAt();
-            String time = getTime(createdAt);
+            String time = TimeUtils.getTime(createdAt);
             ((ImgViewHolder) holder).createdAt_img.setText(time);
             //Glide下载图片
             Glide.with(context).load(bean.getImages().get(0)).into(((ImgViewHolder) holder).img);
@@ -85,9 +82,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        //根据images是否唯恐设置ViewType
+        //根据images是否为空设置ViewType
         List<String> images = data.get(position).getImages();
-        if (images==null){
+        if (images==null && images.size()>0){
             return MyRecyclerViewAdapter.NO_IMG;
         }else {
             return MyRecyclerViewAdapter.WITH_IMG;
@@ -146,46 +143,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 listener.onItemClick(v);
             }
         }
-    }
-
-
-    /**
-     * 对比 “createdAt” 的时间和现在的时间
-     * 1.由于要显示 “几天前”，所以要转化为int类型
-     * 2.分别对比月份，年，天，返回不同的时间显示格式。
-     * @param createdAt
-     * @return
-     */
-    public String getTime(String createdAt){
-        Calendar ca = Calendar.getInstance();
-        int yearNow = ca.get(Calendar.YEAR);//获取年份
-        int monthNow=ca.get(Calendar.MONTH)+1;//获取月份
-        int dayNow=ca.get(Calendar.DAY_OF_MONTH);//获取日
-        int hourNow=ca.get(Calendar.HOUR_OF_DAY);//小时
-        int minuteNow=ca.get(Calendar.MINUTE);//分
-
-        int year=Integer.parseInt(createdAt.substring(0,4));
-        int month=Integer.parseInt(createdAt.substring(5,7));
-        int day=Integer.parseInt(createdAt.substring(8,10));
-        int hour=Integer.parseInt(createdAt.substring(11,13));
-        int minute=Integer.parseInt(createdAt.substring(14,16));
-
-        if (month!=monthNow || year!=yearNow){
-            return yearNow+"-"+monthNow+"-"+dayNow;
-        }else if (month==monthNow && year==yearNow){
-            if (dayNow - day > 10) {
-                return yearNow + "-" + monthNow + "-" + dayNow;
-            } else if (dayNow - day <=10 && dayNow - day > 2) {
-                return dayNow - day+"天前";
-            } else if (dayNow - day == 2) {
-                return "前天";
-            } else if (dayNow - day == 1) {
-                return "昨天";
-            } else if (day == dayNow) {
-                return hour + ":" + minute;
-            }
-        }
-        return null;
     }
 
 }

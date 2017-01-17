@@ -1,28 +1,15 @@
 package com.hujie.mygankio.ui;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewTreeObserver;
-
-import com.google.gson.Gson;
-import com.hujie.mygankio.R;
 import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
 import com.hujie.mygankio.base.BaseListFragment;
-import com.hujie.mygankio.base.LazyFragment;
 import com.hujie.mygankio.net.IConfig;
 import com.hujie.mygankio.javabean.ResultsBean;
-import com.hujie.mygankio.net.IApi;
-import com.hujie.mygankio.net.NetUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +19,8 @@ import java.util.List;
 
 public class ContentFragment extends BaseListFragment implements IConfig.IView{
 
-    private MyRecyclerViewAdapter mAdapter;
     private ArrayList<ResultsBean> mData=new ArrayList<>();
-    private RecyclerView mRecycler;
     private int typeIndex;
-    private int page=1;
     static String[] types={"all","休息视频","Android" ,"iOS" ,"拓展资源" ,"前端","瞎推荐"};
     private IConfig.IPresenter presenter;
 

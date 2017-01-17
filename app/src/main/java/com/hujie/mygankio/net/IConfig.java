@@ -3,7 +3,6 @@ package com.hujie.mygankio.net;
 import android.content.Context;
 
 import com.hujie.mygankio.javabean.ResultsBean;
-import com.hujie.mygankio.net.NetConfig;
 
 import java.util.List;
 

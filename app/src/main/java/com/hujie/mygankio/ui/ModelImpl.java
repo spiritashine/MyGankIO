@@ -27,9 +27,9 @@ public class ModelImpl implements IConfig.IModel{
 
         IApi api = NetUtils.getInstance().getApi();
         Observable<BaseReslut<List<ResultsBean>>> observable = api.listAllRx(type, page);
-        observable.
-                compose(NetHelper.schedulersTransformer()).
-                compose(NetHelper.transformer()).subscribe(new MySubscribe<List<ResultsBean>>(context) {
+        observable. compose(NetHelper.schedulersTransformer()).
+                    compose(NetHelper.transformer()).
+                    subscribe(new MySubscribe<List<ResultsBean>>(context) {
             @Override
             public void onError(ExceptionHandle.ResponeThrowable e) {
                 if(callback!=null){
