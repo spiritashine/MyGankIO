@@ -2,11 +2,13 @@ package com.hujie.mygankio.net;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
+
 
 import rx.Subscriber;
 
 /**
- * Created by wanggang on 2017/1/13.
+ * Created by hujie on 2017/1/16.
  */
 
 public abstract class MySubscribe<T> extends Subscriber<T> {

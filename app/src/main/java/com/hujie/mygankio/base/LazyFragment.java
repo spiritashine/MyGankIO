@@ -2,29 +2,27 @@ package com.hujie.mygankio.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
 
 /**
- * Created by hujie on 2017/1/13.
+ * Created by hujie on 2017/1/16.
  */
 
-public abstract class LazyFragment extends Fragment {
+//懒加载
+public abstract class LazyFragment extends BaseFragment {
 
-    private boolean isCreated; //是否创建
-    private boolean isInited;  //是否初始化过
-    private boolean needInit;  //是否需要初始化
+    protected boolean isCreated; //是否创建
+    protected boolean isInited;  //是否初始化过
+    protected boolean needInit;  //是否需要初始化
 
-    protected View root;
 
+    //在onCreateView()之前执行
+    //判断当前Fragment是否显示
+    //isVisibleToUser  true  显示   false  不显示
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+
         if(isVisibleToUser && !isInited){
             if(isCreated){
                 init();
@@ -34,36 +32,22 @@ public abstract class LazyFragment extends Fragment {
         }
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        root=  inflater.inflate(getLayoutId(),container,false);
-        return root;
-    }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    protected void onInitView(View view,Bundle savedInstanceState) {
         if(needInit){
             init();
         }
         isCreated=true;
     }
 
+
     private void init(){
-        init(root);
+        onInitView(mRootView);
         isInited=true;
     }
 
+    protected abstract void onInitView(View v);
 
 
-    protected abstract void init(View view);
-    @LayoutRes
-    protected abstract int getLayoutId();
-
-    //内存空间不足时清除缓存
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        Glide.get(getContext()).clearMemory();
-    }
 }

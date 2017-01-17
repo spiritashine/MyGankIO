@@ -1,6 +1,6 @@
 package com.hujie.mygankio.net;
 
-import com.hujie.mygankio.javabean.BaseBean;
+import com.hujie.mygankio.javabean.BaseReslut;
 import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.List;
@@ -23,6 +23,6 @@ public interface IApi {
                                @Path("page") int page);
 
     @GET("data/{type}/20/{page}")
-    Observable<BaseBean<List<ResultsBean>>> listAllRx(@Path("type") String type,
-                                                      @Path("page") int page);
+    Observable<BaseReslut<List<ResultsBean>>> listAllRx(@Path("type") String type,
+                                                        @Path("page") int page);
 }

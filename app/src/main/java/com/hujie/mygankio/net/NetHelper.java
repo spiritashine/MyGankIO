@@ -1,15 +1,10 @@
 package com.hujie.mygankio.net;
 
-import com.hujie.mygankio.javabean.BaseBean;
+import com.hujie.mygankio.javabean.BaseReslut;
 
 import rx.Observable;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.android.schedulers.HandlerScheduler;
-import rx.annotations.Experimental;
-import rx.exceptions.Exceptions;
 import rx.functions.Func1;
-import rx.internal.util.ExceptionsUtils;
 import rx.schedulers.Schedulers;
 
 /**
@@ -18,45 +13,49 @@ import rx.schedulers.Schedulers;
 
 public class NetHelper {
 
-    public static Observable.Transformer schedulersTransform(){
-        return new Observable.Transformer(){
+    public static Observable.Transformer schedulersTransformer() {
+        return new Observable.Transformer() {
+
             @Override
             public Object call(Object observable) {
-                return ((Observable)observable).
-                        subscribeOn(Schedulers.io()).
-                        unsubscribeOn(Schedulers.io()).
-                        observeOn(AndroidSchedulers.mainThread());
+                return ((Observable) observable)
+                        .subscribeOn(Schedulers.io()) //工作线程执行
+                        .unsubscribeOn(Schedulers.io())//操作完成后取消订阅
+                        .observeOn(AndroidSchedulers.mainThread());//主线程执行
             }
         };
-
     }
 
-    public static <T> Observable.Transformer transformer(){
-        return new Observable.Transformer(){
+    public static <T> Observable.Transformer transformer() {
+
+        return new Observable.Transformer() {
+
             @Override
-            public Object call(Object o) {
-                return ((Observable)o).
-                        map(new HandleFunc<T>()).
-                        onErrorResumeNext(new HttpResponseFunc<T>());
+            public Object call(Object observable) {
+                return ((Observable) observable)
+                        .map(new HandleFuc<T>())//数据类型转换，取出真正的业务数据
+                        .onErrorResumeNext(new HttpResponseFunc<T>());
+                         //在错误或异常发生时返回一个Observable
+                        // 处理异常
             }
         };
     }
 
-    public static class HttpResponseFunc<T> implements Func1<Throwable,Observable<T>>{
+    public static class HttpResponseFunc<T> implements Func1<Throwable, Observable<T>> {
         @Override
-        public Observable<T> call(Throwable throwable) {
-            return Observable.error(throwable);
+        public Observable<T> call(Throwable t) {
+            //发错错误的 Observable
+            return Observable.error(ExceptionHandle.handleException(t));
         }
     }
 
-    public static class HandleFunc<T> implements Func1<BaseBean<T>,T>{
-
+    public static class HandleFuc<T> implements Func1<BaseReslut<T>, T> {
         @Override
-        public T call(BaseBean<T> tBaseBean) {
-            if (tBaseBean.isError()){
-                throw new RuntimeException(tBaseBean.getMsg());
-            }
-                return tBaseBean.getResult();
+        public T call(BaseReslut<T> response) {
+            //当前业务操作是否成功
+            if (response.isError())
+                throw new RuntimeException(response.getMsg());//抛出异常
+            return response.getResults();
         }
     }
 }

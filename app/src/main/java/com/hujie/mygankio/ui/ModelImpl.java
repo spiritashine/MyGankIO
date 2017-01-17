@@ -2,12 +2,12 @@ package com.hujie.mygankio.ui;
 
 import android.content.Context;
 
+import com.hujie.mygankio.javabean.BaseReslut;
 import com.hujie.mygankio.net.ExceptionHandle;
 import com.hujie.mygankio.net.IConfig;
 import com.hujie.mygankio.net.MySubscribe;
 import com.hujie.mygankio.net.NetConfig;
 import com.hujie.mygankio.net.NetHelper;
-import com.hujie.mygankio.javabean.BaseBean;
 import com.hujie.mygankio.javabean.ResultsBean;
 import com.hujie.mygankio.net.IApi;
 import com.hujie.mygankio.net.NetUtils;
@@ -26,9 +26,9 @@ public class ModelImpl implements IConfig.IModel{
     public void loadData(Context context, String type, int page, final NetConfig callback) {
 
         IApi api = NetUtils.getInstance().getApi();
-        Observable<BaseBean<List<ResultsBean>>> observable = api.listAllRx(type, page);
+        Observable<BaseReslut<List<ResultsBean>>> observable = api.listAllRx(type, page);
         observable.
-                compose(NetHelper.schedulersTransform()).
+                compose(NetHelper.schedulersTransformer()).
                 compose(NetHelper.transformer()).subscribe(new MySubscribe<List<ResultsBean>>(context) {
             @Override
             public void onError(ExceptionHandle.ResponeThrowable e) {
