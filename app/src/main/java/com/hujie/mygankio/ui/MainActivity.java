@@ -1,11 +1,9 @@
 package com.hujie.mygankio.ui;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,70 +11,115 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hujie.mygankio.R;
-import com.hujie.mygankio.adapter.MyPagerAdapter;
-import com.hujie.mygankio.ui.ContentFragment;
+import com.hujie.mygankio.latest.NewFragment;
 
-import java.util.ArrayList;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.fragmemt_container)
+    LinearLayout fragmemtContainer;
+    @BindView(R.id.navigation)
+    BottomNavigationBar navigation;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     private Context context;
+    private ClassifyFragment classifyFragment;
+    private NewFragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager_a);
         BottomNavigationBar navigationBar = (BottomNavigationBar) findViewById(R.id.navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         //设置抽屉开关
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
-        //设置TabLayout
-        String[] titles={"ALL","休息视频","ANDROID","IOS","拓展资源","前端","瞎推荐"};
-        ArrayList<Fragment> fragments=new ArrayList<>();
-
-        for (int i=0;i<7;i++){
-            fragments.add(ContentFragment.getInsatance(i));
-        }
-
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
-        tabLayout.setTabTextColors(Color.GRAY,Color.BLACK);
-
-        tabLayout.setSelectedTabIndicatorColor(Color.CYAN);
-
-        viewPager.setOffscreenPageLimit(fragments.size());
-
-        viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),this,fragments,titles));
-
-        tabLayout.setupWithViewPager(viewPager);
         //添加菜单项
-        navigationBar.addItem(new BottomNavigationItem(R.drawable.toolbar_defaultwindow,"最新")).
-                addItem(new BottomNavigationItem(R.drawable.toolbar_edit_selectnone,"分类浏览")).
-                addItem(new BottomNavigationItem(R.drawable.toolbar_edit_copy,"妹纸")).
-                addItem(new BottomNavigationItem(R.drawable.toolbar_edit_openas,"闲读")).
-                addItem(new BottomNavigationItem(R.drawable.toolbar_moveout,"我的收藏")).
+        navigation.addItem(new BottomNavigationItem(R.drawable.toolbar_defaultwindow, "最新")).
+                addItem(new BottomNavigationItem(R.drawable.toolbar_edit_selectnone, "分类浏览")).
+                addItem(new BottomNavigationItem(R.drawable.toolbar_edit_copy, "妹纸")).
+                addItem(new BottomNavigationItem(R.drawable.toolbar_edit_openas, "闲读")).
+                addItem(new BottomNavigationItem(R.drawable.toolbar_moveout, "我的收藏")).
                 initialise();
         //设置切换模式
-        navigationBar.setMode(BottomNavigationBar.MODE_SHIFTING);
+        navigation.setMode(BottomNavigationBar.MODE_SHIFTING);
         //随页面滚动自动显示隐藏
-        navigationBar.setAutoHideEnabled(true);
+        navigation.setAutoHideEnabled(true);
         //设置颜色
-        navigationBar.setInActiveColor("#333333").
-                        setActiveColor("#bbbbbb").
-                        setBarBackgroundColor("#bbbbbb");
+        navigation.setInActiveColor("#333333").
+                setActiveColor("#bbbbbb").
+                setBarBackgroundColor("#bbbbbb");
+        classifyFragment = new ClassifyFragment();
+        newFragment = new NewFragment();
+        FragmentTransaction ft=  getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.fragmemt_container, newFragment,"0");
+        ft.add(R.id.fragmemt_container, classifyFragment,"1");
+        ft.commit();
+
+        navigation.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position) {
+            FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
+                switch (position){
+                    case 0:
+                        transaction.show(newFragment);
+                        break;
+                    case 1:
+                        transaction.show(classifyFragment);
+                        break;
+                }
+                transaction.commit();
+
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+                FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
+                switch (position){
+                    case 0:
+                        transaction.hide(newFragment);
+                        break;
+                    case 1:
+                        transaction.hide(classifyFragment);
+                        break;
+                }
+                transaction.commit();
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+                FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
+                switch (position){
+                    case 0:
+                        transaction.show(newFragment);
+                        break;
+                    case 1:
+                        transaction.show(classifyFragment);
+                        break;
+                }
+                transaction.commit();
+            }
+        });
 
     }
 
@@ -84,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
-        MenuItem item=menu.findItem(R.id.search_view);
+        MenuItem item = menu.findItem(R.id.search_view);
 
         SearchView searchView = (SearchView) menu.findItem(R.id.search_view).getActionView();
         //添加搜索监听

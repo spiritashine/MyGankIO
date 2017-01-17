@@ -26,4 +26,17 @@ public class IConfig {
     public interface IModel{
         void loadData(Context context,String type,int page,NetConfig callBack);
     }
+
+    public interface INewView{
+        void onPull(List<ResultsBean> data);
+        void loadFinish();
+    }
+
+    public interface INewPresenter{
+        void pull();
+    }
+
+    public interface INewModel{
+        void loadData(Context context,String type,int page,NetConfig callBack);
+    }
 }

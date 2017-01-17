@@ -76,7 +76,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             String time = TimeUtils.getTime(createdAt);
             ((ImgViewHolder) holder).createdAt_img.setText(time);
             //Glide下载图片
-            Glide.with(context).load(bean.getImages().get(0)).into(((ImgViewHolder) holder).img);
+//            Glide.with(context).load(bean.getImages().get(0)).into(((ImgViewHolder) holder).img);
         }
     }
 
@@ -84,7 +84,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public int getItemViewType(int position) {
         //根据images是否为空设置ViewType
         List<String> images = data.get(position).getImages();
-        if (images==null && images.size()>0){
+        if (images==null){
             return MyRecyclerViewAdapter.NO_IMG;
         }else {
             return MyRecyclerViewAdapter.WITH_IMG;

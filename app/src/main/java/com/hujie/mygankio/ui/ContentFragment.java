@@ -10,6 +10,7 @@ import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
 import com.hujie.mygankio.base.BaseListFragment;
 import com.hujie.mygankio.net.IConfig;
 import com.hujie.mygankio.javabean.ResultsBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
