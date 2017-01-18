@@ -1,5 +1,6 @@
 package com.hujie.mygankio.net;
 
+import com.hujie.mygankio.javabean.BaseHeaderReslut;
 import com.hujie.mygankio.javabean.BaseReslut;
 import com.hujie.mygankio.javabean.NewHeaderBean;
 import com.hujie.mygankio.javabean.ResultsBean;
@@ -22,13 +23,14 @@ public interface IApi {
     Observable<BaseReslut<List<ResultsBean>>> listAllRx(@Path("type") String type,
                                                         @Path("page") int page);
 
-    @GET("history/contect/5/1")
-    Observable<BaseReslut<List<NewHeaderBean>>> listHeaderRx();
+    @GET("history/content/5/1")
+    Observable<BaseHeaderReslut<List<NewHeaderBean>>> listHeaderRx();
 
     @GET("day/history")
     Observable<BaseReslut<String>> listHistoryRx();
 
     @GET("day/2017/01/{day}")
     Observable<BaseReslut<List<ResultsBean>>> listFooterRx(@Path("day") String day);
+
 
 }

@@ -37,7 +37,7 @@ public class NewFragment extends BaseFragment {
         ArrayList<Fragment> fragments=new ArrayList<>();
 
         for (int i=0;i<5;i++){
-            fragments.add(new NewFragment());
+            fragments.add(NewContentFragment.getInsatance(i));
         }
 
         newViewpager.setOffscreenPageLimit(fragments.size());

@@ -2,6 +2,7 @@ package com.hujie.mygankio.net;
 
 import android.content.Context;
 
+import com.hujie.mygankio.javabean.NewHeaderBean;
 import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.List;
@@ -28,7 +29,10 @@ public class IConfig {
     }
 
     public interface INewView{
-        void onPull(List<ResultsBean> data);
+        void onPull(List<NewHeaderBean> data);
+        String getLargeTitle();
+        String getImageUrl();
+        void addView();
         void loadFinish();
     }
 
@@ -37,6 +41,6 @@ public class IConfig {
     }
 
     public interface INewModel{
-        void loadData(Context context,String type,int page,NetConfig callBack);
+        void loadData(Context context,NetConfig callback);
     }
 }

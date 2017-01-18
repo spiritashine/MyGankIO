@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hujie.mygankio.R;
+import com.hujie.mygankio.latest.FuliFragment;
 import com.hujie.mygankio.latest.NewFragment;
 
 import butterknife.BindView;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private Context context;
     private ClassifyFragment classifyFragment;
     private NewFragment newFragment;
+    private FuliFragment fuliFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +73,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 setBarBackgroundColor("#bbbbbb");
         classifyFragment = new ClassifyFragment();
         newFragment = new NewFragment();
+        fuliFragment = new FuliFragment();
         FragmentTransaction ft=  getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragmemt_container, newFragment,"0");
+//        ft.add(R.id.fragmemt_container, newFragment,"0");
         ft.add(R.id.fragmemt_container, classifyFragment,"1");
+        ft.add(R.id.fragmemt_container, fuliFragment,"2");
         ft.commit();
 
         navigation.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         break;
                     case 1:
                         transaction.show(classifyFragment);
+                        break;
+                    case 2:
+                        transaction.show(fuliFragment);
                         break;
                 }
                 transaction.commit();
@@ -102,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     case 1:
                         transaction.hide(classifyFragment);
                         break;
+                    case 2:
+                        transaction.hide(fuliFragment);
+                        break;
                 }
                 transaction.commit();
             }
@@ -115,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         break;
                     case 1:
                         transaction.show(classifyFragment);
+                        break;
+                    case 2:
+                        transaction.show(fuliFragment);
                         break;
                 }
                 transaction.commit();
