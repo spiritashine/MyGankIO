@@ -25,7 +25,7 @@ public class NewModelImpl implements IConfig.INewModel {
     @Override
     public void loadData(Context context,final NetConfig callback) {
         IApi api = NetUtils.getInstance().getApi();
-        Observable<BaseHeaderReslut<List<NewHeaderBean>>> headerRx = api.listHeaderRx();
+        Observable<BaseReslut<List<NewHeaderBean>>> headerRx = api.listHeaderRx();
         headerRx.compose(NetHelper.schedulersTransformer())
                 .compose(NetHelper.transformer())
                 .subscribe(new MySubscribe<List<NewHeaderBean>>(context) {

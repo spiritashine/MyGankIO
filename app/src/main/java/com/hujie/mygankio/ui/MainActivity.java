@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         newFragment = new NewFragment();
         fuliFragment = new FuliFragment();
         FragmentTransaction ft=  getSupportFragmentManager().beginTransaction();
-//        ft.add(R.id.fragmemt_container, newFragment,"0");
+        ft.add(R.id.fragmemt_container, newFragment,"0");
         ft.add(R.id.fragmemt_container, classifyFragment,"1");
         ft.add(R.id.fragmemt_container, fuliFragment,"2");
         ft.commit();

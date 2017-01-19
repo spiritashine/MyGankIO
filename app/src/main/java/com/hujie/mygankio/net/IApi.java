@@ -24,7 +24,7 @@ public interface IApi {
                                                         @Path("page") int page);
 
     @GET("history/content/5/1")
-    Observable<BaseHeaderReslut<List<NewHeaderBean>>> listHeaderRx();
+    Observable<BaseReslut<List<NewHeaderBean>>> listHeaderRx();
 
     @GET("day/history")
     Observable<BaseReslut<String>> listHistoryRx();

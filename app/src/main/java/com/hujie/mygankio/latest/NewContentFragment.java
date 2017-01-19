@@ -34,8 +34,8 @@ public class NewContentFragment extends BaseNewFragment implements IConfig.INewV
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new NewPresenterImpl(this,getContext());
         index=getArguments().getInt("index");
+        presenter = new NewPresenterImpl(this,getContext());
     }
 
     @Override
