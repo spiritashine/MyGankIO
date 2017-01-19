@@ -38,7 +38,7 @@ public class FuliAdapter extends RecyclerView.Adapter<FuliAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Glide.with(context).load(mData.get(position).getUrl()).into(holder.fuliImage);
+//        Glide.with(context).load(mData.get(position).getUrl()).into(holder.fuliImage);
     }
 
     @Override

@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.hujie.mygankio.R;
 import com.hujie.mygankio.base.TimeUtils;
 import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**

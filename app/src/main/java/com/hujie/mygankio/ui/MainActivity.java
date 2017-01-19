@@ -17,7 +17,6 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hujie.mygankio.R;
 import com.hujie.mygankio.latest.FuliFragment;
-import com.hujie.mygankio.latest.NewFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,16 +34,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
-    private Context context;
     private ClassifyFragment classifyFragment;
-    private NewFragment newFragment;
     private FuliFragment fuliFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationBar navigationBar = (BottomNavigationBar) findViewById(R.id.navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
@@ -72,10 +68,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 setActiveColor("#bbbbbb").
                 setBarBackgroundColor("#bbbbbb");
         classifyFragment = new ClassifyFragment();
-        newFragment = new NewFragment();
         fuliFragment = new FuliFragment();
         FragmentTransaction ft=  getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragmemt_container, newFragment,"0");
         ft.add(R.id.fragmemt_container, classifyFragment,"1");
         ft.add(R.id.fragmemt_container, fuliFragment,"2");
         ft.commit();
@@ -85,9 +79,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onTabSelected(int position) {
             FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
                 switch (position){
-                    case 0:
-                        transaction.show(newFragment);
-                        break;
                     case 1:
                         transaction.show(classifyFragment);
                         break;
@@ -103,9 +94,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onTabUnselected(int position) {
                 FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
                 switch (position){
-                    case 0:
-                        transaction.hide(newFragment);
-                        break;
                     case 1:
                         transaction.hide(classifyFragment);
                         break;
@@ -120,9 +108,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onTabReselected(int position) {
                 FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
                 switch (position){
-                    case 0:
-                        transaction.show(newFragment);
-                        break;
                     case 1:
                         transaction.show(classifyFragment);
                         break;
