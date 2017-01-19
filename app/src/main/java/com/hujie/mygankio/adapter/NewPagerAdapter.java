@@ -4,25 +4,21 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.view.View;
 
 import java.util.ArrayList;
 
 /**
- * Created by hujie on 2017/1/13.
+ * Created by hujie on 2017/1/19.
  */
 
-public class MyPagerAdapter extends FragmentPagerAdapter {
+public class NewPagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private ArrayList<Fragment> fragments;
-    private String[] titles;
 
-    public MyPagerAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragments, String[] titles) {
+    public NewPagerAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragments) {
         super(fm);
         this.context = context;
         this.fragments = fragments;
-        this.titles = titles;
     }
 
 
@@ -36,8 +32,4 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         return fragments.size();
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return titles[position];
-    }
 }

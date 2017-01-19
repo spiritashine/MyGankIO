@@ -1,6 +1,5 @@
 package com.hujie.mygankio.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -106,16 +105,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
             @Override
             public void onTabReselected(int position) {
-                FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
-                switch (position){
-                    case 1:
-                        transaction.show(classifyFragment);
-                        break;
-                    case 2:
-                        transaction.show(fuliFragment);
-                        break;
-                }
-                transaction.commit();
+//                FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
+//                switch (position){
+//                    case 1:
+//                        transaction.show(classifyFragment);
+//                        break;
+//                    case 2:
+//                        transaction.show(fuliFragment);
+//                        break;
+//                }
+//                transaction.commit();
             }
         });
 

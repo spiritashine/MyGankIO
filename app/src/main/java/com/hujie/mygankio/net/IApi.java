@@ -2,6 +2,7 @@ package com.hujie.mygankio.net;
 
 
 import com.hujie.mygankio.javabean.BaseReslut;
+import com.hujie.mygankio.javabean.HistoryBean;
 import com.hujie.mygankio.javabean.ResultsBean;
 import java.util.List;
 import retrofit2.http.GET;
@@ -18,6 +19,7 @@ public interface IApi {
     Observable<BaseReslut<List<ResultsBean>>> listAllRx(@Path("type") String type,
                                                         @Path("page") int page);
 
-
+    @GET("history/content/5/1")
+    Observable<BaseReslut<List<HistoryBean>>> listHeadTitleRx();
 
 }

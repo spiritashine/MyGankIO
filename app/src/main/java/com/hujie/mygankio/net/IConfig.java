@@ -27,4 +27,5 @@ public class IConfig {
         void loadData(Context context,String type,int page,NetConfig callBack);
     }
 
+
 }

@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.hujie.mygankio.R;
-import com.hujie.mygankio.adapter.MyPagerAdapter;
+import com.hujie.mygankio.adapter.ClassifyPagerAdapter;
 import com.hujie.mygankio.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class ClassifyFragment extends BaseFragment {
 
         viewpagerClassify.setOffscreenPageLimit(fragments.size());
 
-        viewpagerClassify.setAdapter(new MyPagerAdapter(getFragmentManager(),getContext(),fragments,titles));
+        viewpagerClassify.setAdapter(new ClassifyPagerAdapter(getFragmentManager(),getContext(),fragments,titles));
 
         tablayout.setupWithViewPager(viewpagerClassify);
     }
