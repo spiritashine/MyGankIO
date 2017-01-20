@@ -12,12 +12,10 @@ import java.util.ArrayList;
  */
 
 public class NewPagerAdapter extends FragmentPagerAdapter {
-    private Context context;
     private ArrayList<Fragment> fragments;
 
-    public NewPagerAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragments) {
+    public NewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
         super(fm);
-        this.context = context;
         this.fragments = fragments;
     }
 

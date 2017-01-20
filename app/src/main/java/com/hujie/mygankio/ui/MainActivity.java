@@ -16,6 +16,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hujie.mygankio.R;
 import com.hujie.mygankio.latest.FuliFragment;
+import com.hujie.mygankio.latest.NewFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private ClassifyFragment classifyFragment;
     private FuliFragment fuliFragment;
+    private NewFragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +70,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 setBarBackgroundColor("#bbbbbb");
         classifyFragment = new ClassifyFragment();
         fuliFragment = new FuliFragment();
+        newFragment = new NewFragment();
         FragmentTransaction ft=  getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmemt_container, classifyFragment,"1");
         ft.add(R.id.fragmemt_container, fuliFragment,"2");
+        ft.add(R.id.fragmemt_container, newFragment,"0");
         ft.commit();
 
         navigation.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
@@ -78,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onTabSelected(int position) {
             FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
                 switch (position){
+                    case 0:
+                        transaction.show(newFragment);
+                        break;
                     case 1:
                         transaction.show(classifyFragment);
                         break;
@@ -93,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onTabUnselected(int position) {
                 FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
                 switch (position){
+                    case 0:
+                        transaction.hide(newFragment);
+                        break;
                     case 1:
                         transaction.hide(classifyFragment);
                         break;
