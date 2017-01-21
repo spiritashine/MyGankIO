@@ -29,11 +29,6 @@ public abstract class MySubscribe<T> extends Subscriber<T> {
     }
 
     @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
     public void onError(Throwable e) {
         //统一处理异常
         if (e instanceof ExceptionHandle.ResponeThrowable) {

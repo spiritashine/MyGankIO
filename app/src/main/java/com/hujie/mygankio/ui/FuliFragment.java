@@ -1,20 +1,13 @@
-package com.hujie.mygankio.latest;
+package com.hujie.mygankio.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 
 import com.hujie.mygankio.adapter.FuliAdapter;
-import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
 import com.hujie.mygankio.base.BaseFuliFragment;
-import com.hujie.mygankio.base.BaseListFragment;
 import com.hujie.mygankio.javabean.ResultsBean;
-import com.hujie.mygankio.net.IConfig;
-import com.hujie.mygankio.ui.ContentActivity;
+import com.hujie.mygankio.ui.IClassifyConstraint;
 import com.hujie.mygankio.ui.PresenterImpl;
 
 import java.util.ArrayList;
@@ -24,10 +17,10 @@ import java.util.List;
  * Created by hujie on 2017/1/13.
  */
 
-public class FuliFragment extends BaseFuliFragment implements IConfig.IView{
+public class FuliFragment extends BaseFuliFragment implements IClassifyConstraint.IView{
 
     private ArrayList<ResultsBean> mData=new ArrayList<>();
-    private IConfig.IPresenter presenter;
+    private IClassifyConstraint.IPresenter presenter;
 
 
     @Override

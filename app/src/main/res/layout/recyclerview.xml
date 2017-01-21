@@ -1,6 +1,7 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hujie.mygankio.base.StatusViewLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/statusView"
     android:layout_height="match_parent"
     tools:context=".ui.ContentFragment">
 
@@ -10,16 +11,10 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_a"
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-
-    <ViewStub
-        android:id="@+id/emptyView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout="@layout/view_empty" />
-</FrameLayout>
+</com.hujie.mygankio.base.StatusViewLayout>

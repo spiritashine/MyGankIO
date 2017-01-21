@@ -1,15 +1,12 @@
 package com.hujie.mygankio.net;
 
 
-import com.hujie.mygankio.javabean.BaseReslut;
+import com.hujie.mygankio.javabean.BaseResult;
 import com.hujie.mygankio.javabean.HistoryBean;
 import com.hujie.mygankio.javabean.NewBean;
-import com.hujie.mygankio.javabean.NewItemBean;
 import com.hujie.mygankio.javabean.ResultsBean;
 import java.util.List;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
@@ -20,22 +17,31 @@ import rx.Observable;
 
 public interface IApi {
 
+    /**
+     * 分类页
+     * @param type
+     * @param page
+     * @return
+     */
     @GET("data/{type}/20/{page}")
-    Observable<BaseReslut<List<ResultsBean>>> listAllRx(@Path("type") String type,
+    Observable<BaseResult<List<ResultsBean>>> listAllRx(@Path("type") String type,
                                                         @Path("page") int page);
 
-    @GET("history/content/5/1")
-    Observable<BaseReslut<List<HistoryBean>>> listHeadTitleRx();
-
+    /**
+     * 首页大标题
+     * @param size
+     * @return
+     */
     @GET("history/content/{size}/1")
-    Call<BaseReslut<List<HistoryBean>>> getTab(@Path("size") int size);
+    Observable<BaseResult<List<HistoryBean>>> getNewTitleRx(@Path("size") int size);
+
 
     /**
-     * 2015/08/07
+     * 首页大标题下的内容
      * @param date
      * @return
      */
     @GET("day/{date}")
-    Call<BaseReslut<NewBean>> getNew(@Path("date") String date);
+    Observable<BaseResult<NewBean>> getNewContentRx(@Path("date") String date);
 
 }

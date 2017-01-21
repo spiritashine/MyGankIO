@@ -1,6 +1,6 @@
 package com.hujie.mygankio.net;
 
-import com.hujie.mygankio.javabean.BaseReslut;
+import com.hujie.mygankio.javabean.BaseResult;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -49,9 +49,9 @@ public class NetHelper {
         }
     }
 
-    public static class HandleFuc<T> implements Func1<BaseReslut<T>, T> {
+    public static class HandleFuc<T> implements Func1<BaseResult<T>, T> {
         @Override
-        public T call(BaseReslut<T> response) {
+        public T call(BaseResult<T> response) {
             //当前业务操作是否成功
             if (response.isError())
                 throw new RuntimeException(response.getMsg());//抛出异常

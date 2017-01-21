@@ -34,16 +34,17 @@ public class NetUtils {
     }
 
     private NetUtils (){
-        //添加拦截器
-         HttpLoggingInterceptor interceptor=new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+        //设置拦截器
+         HttpLoggingInterceptor interceptor =
+                 new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
              @Override
              public void log(String message) {
-                 Log.i("=============", "log: "+message);
+                 Log.i("===HTTP===", message);
              }
          });
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        //设置超时时间
+        //添加拦截器，设置超时时间
         OkHttpClient client=new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .connectTimeout(20, TimeUnit.SECONDS)

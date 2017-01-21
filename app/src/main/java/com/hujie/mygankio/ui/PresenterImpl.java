@@ -2,8 +2,7 @@ package com.hujie.mygankio.ui;
 
 import android.content.Context;
 
-import com.hujie.mygankio.net.IConfig;
-import com.hujie.mygankio.net.NetConfig;
+import com.hujie.mygankio.net.NetResponse;
 import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.List;
@@ -12,14 +11,14 @@ import java.util.List;
  * Created by hujie on 2017/1/16.
  */
 
-public class PresenterImpl implements IConfig.IPresenter {
-    private IConfig.IView view;
-    private IConfig.IModel model;
+public class PresenterImpl implements IClassifyConstraint.IPresenter {
+    private IClassifyConstraint.IView view;
+    private IClassifyConstraint.IModel model;
     private String type;
     private Context context;
     private int page=1;
 
-    public PresenterImpl(IConfig.IView view, Context context, String type) {
+    public PresenterImpl(IClassifyConstraint.IView view, Context context, String type) {
         this.view = view;
         this.context = context;
         this.type = type;
@@ -28,7 +27,7 @@ public class PresenterImpl implements IConfig.IPresenter {
 
     @Override
     public void pull() {
-        model.loadData(context, type, page, new NetConfig() {
+        model.loadData(context, type, page, new NetResponse() {
             @Override
             public void onResponse(Object data) {
                 List<ResultsBean> list= (List<ResultsBean>) data;
@@ -46,7 +45,7 @@ public class PresenterImpl implements IConfig.IPresenter {
 
     @Override
     public void drag() {
-        model.loadData(context, type, ++page, new NetConfig() {
+        model.loadData(context, type, ++page, new NetResponse() {
             @Override
             public void onResponse(Object data) {
                 List<ResultsBean> list= (List<ResultsBean>) data;

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hujie.mygankio.R;
 import com.hujie.mygankio.javabean.NewItemBean;
 import com.hujie.mygankio.latest.ItemType;
@@ -36,17 +37,16 @@ public class NewRecyclerAdapter extends RecyclerView.Adapter<NewRecyclerAdapter.
     public NewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case ItemType.TYPE_TITILE:
-                View view = inflater.inflate(R.layout.item_new_title, parent, false);
-                return new TitleHolder(view);
+                View title = inflater.inflate(R.layout.item_new_title, parent, false);
+                return new TitleHolder(title);
             case ItemType.TYPE_IMAGE:
-
-                break;
+                View image = inflater.inflate(R.layout.item_new_image, parent, false);
+                return new ImageHolder(context,image);
             case ItemType.TYPE_SUBTITLE:
-
-                break;
+                View subTitle = inflater.inflate(R.layout.item_new_subtitle, parent, false);
+                return new SubTitleHolder(subTitle);
             case ItemType.TYPE_CONTENT:
 
-                break;
         }
 
         return null;
@@ -84,15 +84,47 @@ public class NewRecyclerAdapter extends RecyclerView.Adapter<NewRecyclerAdapter.
 
     public static class ImageHolder extends NewViewHolder {
         ImageView imageNew;
+        private Context context;
 
-        public ImageHolder(View itemView) {
+        public ImageHolder(Context context,View itemView) {
             super(itemView);
+            this.context=context;
             imageNew= (ImageView) itemView.findViewById(R.id.image_new);
         }
 
         @Override
         public void fill(ItemType type) {
             NewItemBean bean = (NewItemBean) type.getData();
+            String url = bean.getUrl();
+            Glide.with(context).load(url).into(imageNew);
+        }
+    }
+
+    public static class SubTitleHolder extends NewViewHolder {
+        TextView subTitleNew;
+
+        public SubTitleHolder(View itemView) {
+            super(itemView);
+            subTitleNew= (TextView) itemView.findViewById(R.id.subtitle_new);
+        }
+
+        @Override
+        public void fill(ItemType type) {
+            subTitleNew.setText((String)type.getData());
+        }
+    }
+
+    public static class ContentHolder extends NewViewHolder {
+        TextView contentNew;
+
+        public ContentHolder(View itemView) {
+            super(itemView);
+            contentNew= (TextView) itemView.findViewById(R.id.content_new);
+        }
+
+        @Override
+        public void fill(ItemType type) {
+            contentNew.setText((String)type.getData());
         }
     }
 

@@ -1,21 +1,10 @@
 package com.hujie.mygankio.javabean;
 
 /**
- * Created by hujie on 2017/1/20.
+ * Created by hujie on 2017/1/21.
  */
 
 public class NewItemBean {
-
-    /**
-     * _id : 56cc6d23421aa95caa707a69
-     * createdAt : 2015-08-06T07:15:52.65Z
-     * desc : 类似Link Bubble的悬浮式操作设计
-     * publishedAt : 2015-08-07T03:57:48.45Z
-     * type : Android
-     * url : https://github.com/recruit-lifestyle/FloatingView
-     * used : true
-     * who : mthli
-     */
 
     private String _id;
     private String createdAt;

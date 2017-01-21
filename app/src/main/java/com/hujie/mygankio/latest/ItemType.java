@@ -1,6 +1,7 @@
 package com.hujie.mygankio.latest;
 
 /**
+ * 首页大标题下的布局，分为四种
  * Created by hujie on 2017/1/20.
  */
 

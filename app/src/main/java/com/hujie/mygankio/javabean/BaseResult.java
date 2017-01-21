@@ -4,7 +4,7 @@ package com.hujie.mygankio.javabean;
  * Created by hujie on 2017/1/16.
  */
 
-public class BaseReslut<T> {
+public class BaseResult<T> {
 
     private boolean error;
     private T results;

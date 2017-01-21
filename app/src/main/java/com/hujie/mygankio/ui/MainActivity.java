@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hujie.mygankio.R;
-import com.hujie.mygankio.latest.FuliFragment;
 import com.hujie.mygankio.latest.NewFragment;
 
 import butterknife.BindView;

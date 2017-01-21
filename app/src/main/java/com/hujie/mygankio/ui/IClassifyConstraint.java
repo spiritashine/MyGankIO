@@ -1,8 +1,9 @@
-package com.hujie.mygankio.net;
+package com.hujie.mygankio.ui;
 
 import android.content.Context;
 
 import com.hujie.mygankio.javabean.ResultsBean;
+import com.hujie.mygankio.net.NetResponse;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by hujie on 2017/1/16.
  */
 
-public class IConfig {
+public class IClassifyConstraint {
 
     public interface IView{
         void onPull(List<ResultsBean> data);
@@ -24,7 +25,7 @@ public class IConfig {
     }
 
     public interface IModel{
-        void loadData(Context context,String type,int page,NetConfig callBack);
+        void loadData(Context context,String type,int page,NetResponse callBack);
     }
 
 

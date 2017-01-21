@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.hujie.mygankio.adapter.MyRecyclerViewAdapter;
 import com.hujie.mygankio.base.BaseListFragment;
-import com.hujie.mygankio.net.IConfig;
 import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.ArrayList;
@@ -18,12 +17,12 @@ import java.util.List;
  * Created by hujie on 2017/1/13.
  */
 
-public class ContentFragment extends BaseListFragment implements IConfig.IView{
+public class ContentFragment extends BaseListFragment implements IClassifyConstraint.IView{
 
     private ArrayList<ResultsBean> mData=new ArrayList<>();
     private int typeIndex;
     static String[] types={"all","休息视频","Android" ,"iOS" ,"拓展资源" ,"前端","瞎推荐"};
-    private IConfig.IPresenter presenter;
+    private IClassifyConstraint.IPresenter presenter;
 
     public static Fragment getInsatance(int i){
         ContentFragment fragment = new ContentFragment();
