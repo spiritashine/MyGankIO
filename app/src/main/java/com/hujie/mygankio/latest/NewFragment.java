@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.hujie.mygankio.R;
 import com.hujie.mygankio.adapter.NewPagerAdapter;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by hujie on 2017/1/19.
@@ -31,7 +34,11 @@ public class NewFragment extends BaseFragment implements NewConstraint.INewView 
     TabLayout tablayoutNew;
     @BindView(R.id.viewpager_new)
     ViewPager viewpagerNew;
-    private StatusViewLayout statusView;
+    @BindView(R.id.statusview)
+    StatusViewLayout statusView;
+
+    public NewFragment() {
+    }
 
     @Override
     protected int getLayoutResource() {
@@ -41,12 +48,12 @@ public class NewFragment extends BaseFragment implements NewConstraint.INewView 
     @Override
     protected void onInitView(View view, Bundle savedInstanceState) {
         //添加viewPager翻页旋转动画
-        viewpagerNew.setPageTransformer(true,new RotateTransformer());
+        viewpagerNew.setPageTransformer(true, new RotateTransformer());
     }
 
     @Override
     protected void onInitData() {
-        NewConstraint.INewPresenter presenter=new NewPresenterImpl(this);
+        NewConstraint.INewPresenter presenter = new NewPresenterImpl(this);
         presenter.onLoadTitle(5);
     }
 
@@ -62,17 +69,17 @@ public class NewFragment extends BaseFragment implements NewConstraint.INewView 
 
     @Override
     public void showError(String msg) {
-        statusView.showError();
+        statusView.showError(msg);
     }
 
     @Override
     public void fillData(Object data) {
-        List<HistoryBean> historyBeans= (List<HistoryBean>) data;
-        ArrayList<Fragment> fragments=new ArrayList<>();
-        for (int i=0;i<historyBeans.size();i++){
+        List<HistoryBean> historyBeans = (List<HistoryBean>) data;
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        for (int i = 0; i < historyBeans.size(); i++) {
             HistoryBean historyBean = historyBeans.get(i);
-            fragments.add(NewContentFragment.getInsatance
-                    (historyBean.getTitle(),historyBean.getPublishedAt()));
+            fragments.add(NewContentFragment.getInstance
+                    (historyBean.getTitle(), historyBean.getPublishedAt()));
         }
         NewPagerAdapter adapter = new NewPagerAdapter(getChildFragmentManager(), fragments);
         viewpagerNew.setAdapter(adapter);

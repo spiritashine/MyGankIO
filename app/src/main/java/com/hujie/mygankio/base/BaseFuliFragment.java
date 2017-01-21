@@ -18,12 +18,10 @@ import butterknife.BindView;
 
 public abstract class BaseFuliFragment extends BaseFragment {
 
-    @BindView(R.id.recycle_a)
+    @BindView(R.id.recycler)
     RecyclerView mRecycleView;
     @BindView(R.id.refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.emptyView)
-    ViewStub emptyView;
 
     protected RecyclerView.Adapter mAdapter;
 

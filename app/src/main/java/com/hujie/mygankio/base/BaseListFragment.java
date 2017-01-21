@@ -1,18 +1,14 @@
 package com.hujie.mygankio.base;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.hujie.mygankio.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by hujie on 2017/1/16.
@@ -76,12 +72,12 @@ public abstract class BaseListFragment extends LazyFragment {
             DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
             recycler.addItemDecoration(decoration);
         }
-        recycler.setHasFixedSize(true);
-        recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = getAdapter(recycler);
-        if (mAdapter != null)
+            recycler.setHasFixedSize(true);
+            recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+            mAdapter = getAdapter(recycler);
+        if (mAdapter!=null){
             recycler.setAdapter(mAdapter);
-
+        }
         //如果不能刷新，那么关闭刷新，加载数据
         if (!enableRefresh()){
             refresh.setEnabled(false);

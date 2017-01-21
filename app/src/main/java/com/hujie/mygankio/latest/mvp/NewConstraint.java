@@ -37,6 +37,6 @@ public class NewConstraint {
         void onLoadTitle(int size);
 
         //处理内容
-        void onloadContent(String data,String title);
+        void onloadContent(String date,String title);
     }
 }

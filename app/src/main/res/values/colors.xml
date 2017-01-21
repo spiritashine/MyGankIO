@@ -3,4 +3,5 @@
     <color name="colorPrimary">#aaa</color>
     <color name="colorPrimaryDark">#555</color>
     <color name="colorAccent">#aaa</color>
+    <color name="status_view_text_color">#aaa</color>
 </resources>

@@ -19,13 +19,10 @@ public abstract class MySubscribe<T> extends Subscriber<T> {
     }
 
     private Context context;
-    private ProgressDialog dialog;
 
     @Override
     public void onStart() {
         super.onStart();
-         dialog=new ProgressDialog(context);
-         dialog.show();
     }
 
     @Override
@@ -42,7 +39,6 @@ public abstract class MySubscribe<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {
-        dialog.dismiss();
     }
 
     //统一处理异常  出现错误直接调用 自定义的 onError

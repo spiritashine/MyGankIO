@@ -54,6 +54,7 @@ public class ContentFragment extends BaseListFragment implements IClassifyConstr
     @Override
     public void loadFinish() {
         loadfinish();
+
     }
 
     @Override
@@ -85,4 +86,6 @@ public class ContentFragment extends BaseListFragment implements IClassifyConstr
     protected void addData() {
         presenter.drag();
     }
+
+
 }

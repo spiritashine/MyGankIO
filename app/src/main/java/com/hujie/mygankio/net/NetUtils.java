@@ -42,7 +42,7 @@ public class NetUtils {
                  Log.i("===HTTP===", message);
              }
          });
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
         //添加拦截器，设置超时时间
         OkHttpClient client=new OkHttpClient.Builder()
