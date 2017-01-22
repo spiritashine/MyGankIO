@@ -1,15 +1,15 @@
 package com.hujie.mygankio.latest;
 
 /**
- * 首页大标题下的布局，分为四种
- * Created by hujie on 2017/1/20.
+ * Created by wanggang on 2017/1/20.
  */
 
 public class ItemType {
-    public static final int TYPE_TITILE=0;
-    public static final int TYPE_IMAGE=1;
-    public static final int TYPE_SUBTITLE=2;
-    public static final int TYPE_CONTENT=3;
+
+    public static final int TYPE_TITLE = 0;
+    public static final int TYPE_IMAGE = 1;
+    public static final int TYPE_SUB_TITLE = 2;
+    public static final int TYPE_CONTENT = 3;
 
     private int type;
     private Object data;

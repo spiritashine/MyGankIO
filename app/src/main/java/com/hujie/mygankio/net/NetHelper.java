@@ -1,6 +1,6 @@
 package com.hujie.mygankio.net;
 
-import com.hujie.mygankio.javabean.BaseResult;
+import com.hujie.mygankio.base.BaseResult;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

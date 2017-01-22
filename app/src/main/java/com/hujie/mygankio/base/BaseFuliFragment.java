@@ -6,7 +6,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewStub;
 
 import com.hujie.mygankio.R;
 
@@ -114,7 +113,7 @@ public abstract class BaseFuliFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.recyclerview;
+        return R.layout.fragment_item;
     }
 
     @Override

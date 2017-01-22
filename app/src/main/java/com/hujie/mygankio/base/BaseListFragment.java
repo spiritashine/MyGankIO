@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.hujie.mygankio.base.StatusViewLayout;
 import com.hujie.mygankio.R;
 
 import butterknife.BindView;
@@ -16,23 +17,23 @@ import butterknife.BindView;
 
 public abstract class BaseListFragment extends LazyFragment {
 
-
-    @BindView(R.id.recycler)
-    RecyclerView recycler;
-    @BindView(R.id.refresh)
-    SwipeRefreshLayout refresh;
+    @BindView(R.id.recycleView)
+    protected RecyclerView mRecycleView;
+    @BindView(R.id.swipeRefreshView)
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.statusView)
-    StatusViewLayout statusView;
+    protected StatusViewLayout mStatusView;
 
-    private RecyclerView.Adapter mAdapter;
+
+    protected RecyclerView.Adapter mAdapter;
+
 
     /**
      * 设置显示的Adapter
-     * 将RecyclerView传过去，用于点击事件获取childItemPosition
      *
      * @return RecycleView 显示的Adapter
      */
-    protected abstract RecyclerView.Adapter getAdapter(RecyclerView recycler);
+    protected abstract RecyclerView.Adapter getAdapter(RecyclerView mRecycleView);
 
     /**
      * 下拉刷新，加载数据
@@ -49,43 +50,43 @@ public abstract class BaseListFragment extends LazyFragment {
      */
     public void loadfinish() {
         mAdapter.notifyDataSetChanged();
-        refresh.setRefreshing(false);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
-    protected boolean enableRefresh(){
+    protected boolean enableRefresh() {
         return true;
     }
 
-    protected boolean isAddItemDecoration(){
+    protected boolean isAddItemDecoration() {
         return true;
     }
 
     @Override
     protected void onInitView(View v) {
-        refresh.setColorSchemeColors(
+        mSwipeRefreshLayout.setColorSchemeColors(
                 getResources().getColor(android.R.color.holo_red_light),
                 getResources().getColor(android.R.color.holo_green_light),
                 getResources().getColor(android.R.color.holo_orange_light),
                 getResources().getColor(android.R.color.holo_blue_light)
         );
-        if (isAddItemDecoration()){
+
+        if (isAddItemDecoration()) {
             DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-            recycler.addItemDecoration(decoration);
+            mRecycleView.addItemDecoration(decoration);
         }
-            recycler.setHasFixedSize(true);
-            recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-            mAdapter = getAdapter(recycler);
-        if (mAdapter!=null){
-            recycler.setAdapter(mAdapter);
-        }
-        //如果不能刷新，那么关闭刷新，加载数据
-        if (!enableRefresh()){
-            refresh.setEnabled(false);
+        mRecycleView.setHasFixedSize(true);
+        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = getAdapter(mRecycleView);
+        if (mAdapter != null)
+            mRecycleView.setAdapter(mAdapter);
+
+        if (!enableRefresh()) {
+            mSwipeRefreshLayout.setEnabled(false);
             loadData();
             return;
         }
 
-            refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 loadData();
@@ -93,7 +94,7 @@ public abstract class BaseListFragment extends LazyFragment {
         });
 
 
-        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int lastVisibleItem;
 
             @Override
@@ -102,8 +103,8 @@ public abstract class BaseListFragment extends LazyFragment {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
                         lastVisibleItem + 1 == mAdapter.getItemCount()) {
                     //滑动到底部，加载新的数据
-                    if (!refresh.isRefreshing()) {
-                        refresh.setRefreshing(true);
+                    if (!mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(true);
                         addData();
                     }
                 }
@@ -120,19 +121,15 @@ public abstract class BaseListFragment extends LazyFragment {
                         lastVisibleItem = last;
                     }
                 }
-
-
             }
         });
-
-        //预加载
-        refresh.setRefreshing(true);
+        mSwipeRefreshLayout.setRefreshing(true);
         loadData();
     }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.recyclerview;
+        return R.layout.fragment_classify_item;
     }
 
     @Override
@@ -140,16 +137,17 @@ public abstract class BaseListFragment extends LazyFragment {
 
     }
 
-    public void showLoading(){
-        statusView.showLoading();
+
+    public void showLoading() {
+        mStatusView.showLoading();
     }
 
-    public void showContent(){
-        statusView.showContent();
+    public void showContent() {
+        mStatusView.showContent();
     }
 
-    public void showError(String msg){
-        statusView.showError();
+    public void showError(String msg) {
+        mStatusView.showError();
     }
 
 }
