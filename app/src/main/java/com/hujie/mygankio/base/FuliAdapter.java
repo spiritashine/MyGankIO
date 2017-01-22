@@ -1,13 +1,16 @@
-package com.hujie.mygankio.classify;
+package com.hujie.mygankio.base;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hujie.mygankio.R;
+import com.hujie.mygankio.classify.ResultsBean;
 
 import java.util.ArrayList;
 
@@ -36,7 +39,8 @@ public class FuliAdapter extends RecyclerView.Adapter<FuliAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-//        Glide.with(context).load(mData.get(position).getUrl()).into(holder.fuliImage);
+        Log.i("=============", "onBindViewHolder: ");
+        Glide.with(context).load(mData.get(position).getUrl()).into(holder.fuliImage);
     }
 
     @Override
@@ -46,7 +50,6 @@ public class FuliAdapter extends RecyclerView.Adapter<FuliAdapter.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView fuliImage;
-
         public MyViewHolder(View itemView) {
             super(itemView);
             fuliImage= (ImageView) itemView.findViewById(R.id.fuli_image);

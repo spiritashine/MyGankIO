@@ -1,4 +1,4 @@
-package com.hujie.mygankio.classify;
+package com.hujie.mygankio.base;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hujie.mygankio.R;
+import com.hujie.mygankio.classify.ClassifyFragment;
 import com.hujie.mygankio.latest.RecommendFragment;
 
 import butterknife.BindView;

@@ -37,7 +37,7 @@ public class PresenterImpl implements IClassifyConstraint.IPresenter {
 
             @Override
             public void onError(String msg) {
-
+                view.loadError(msg);
             }
         });
 
@@ -55,7 +55,7 @@ public class PresenterImpl implements IClassifyConstraint.IPresenter {
 
             @Override
             public void onError(String msg) {
-
+                view.loadError(msg);
             }
         });
     }

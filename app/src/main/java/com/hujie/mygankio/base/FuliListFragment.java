@@ -15,22 +15,25 @@ import butterknife.BindView;
  * Created by hujie on 2017/1/16.
  */
 
-public abstract class BaseFuliFragment extends BaseFragment {
+public abstract class FuliListFragment extends BaseFragment {
 
-    @BindView(R.id.recycler)
-    RecyclerView mRecycleView;
-    @BindView(R.id.refresh)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.recycleView)
+    protected RecyclerView mRecycleView;
+    @BindView(R.id.swipeRefreshView)
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.statusView)
+    protected StatusViewLayout mStatusView;
+
 
     protected RecyclerView.Adapter mAdapter;
 
+
     /**
      * 设置显示的Adapter
-     * 将RecyclerView传过去，用于点击事件获取childItemPosition
      *
      * @return RecycleView 显示的Adapter
      */
-    protected abstract RecyclerView.Adapter getAdapter(RecyclerView mRecycleView);
+    protected abstract RecyclerView.Adapter getAdapter();
 
     /**
      * 下拉刷新，加载数据
@@ -38,7 +41,7 @@ public abstract class BaseFuliFragment extends BaseFragment {
     protected abstract void loadData();
 
     /**
-     *  上拉加载，加载数据
+     * 上拉加载，加载数据
      */
     protected abstract void addData();
 
@@ -50,6 +53,15 @@ public abstract class BaseFuliFragment extends BaseFragment {
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
+    protected boolean enableRefresh() {
+        return true;
+    }
+
+    protected boolean isAddItemDecoration() {
+        return true;
+    }
+
+
     @Override
     protected void onInitView(View view,Bundle savedInstanceState) {
         mSwipeRefreshLayout.setColorSchemeColors(
@@ -59,13 +71,22 @@ public abstract class BaseFuliFragment extends BaseFragment {
                 getResources().getColor(android.R.color.holo_blue_light)
         );
 
-        DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        mRecycleView.addItemDecoration(decoration);
+        if (isAddItemDecoration()) {
+            DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+            mRecycleView.addItemDecoration(decoration);
+        }
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = getAdapter(mRecycleView);
+        mAdapter = getAdapter();
         if (mAdapter != null)
             mRecycleView.setAdapter(mAdapter);
+
+        if (!enableRefresh()) {
+            mSwipeRefreshLayout.setEnabled(false);
+            loadData();
+            return;
+        }
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -101,19 +122,15 @@ public abstract class BaseFuliFragment extends BaseFragment {
                         lastVisibleItem = last;
                     }
                 }
-
-
             }
         });
-
-        //预加载
         mSwipeRefreshLayout.setRefreshing(true);
         loadData();
     }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_item;
+        return R.layout.fragment_classify_item;
     }
 
     @Override
@@ -121,8 +138,17 @@ public abstract class BaseFuliFragment extends BaseFragment {
 
     }
 
-    @Override
-    protected void onInitPreData(View view, Bundle savedInstanceState) {
-        super.onInitPreData(view, savedInstanceState);
+
+    public void showLoading() {
+        mStatusView.showLoading();
     }
+
+    public void showContent() {
+        mStatusView.showContent();
+    }
+
+    public void showError(String msg) {
+        mStatusView.showError();
+    }
+
 }

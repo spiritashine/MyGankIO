@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".classify.MainActivity"
+            android:name=".base.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         <intent-filter>

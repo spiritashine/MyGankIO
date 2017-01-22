@@ -25,6 +25,7 @@ public class ClassifyFragment extends BaseFragment {
     @BindView(R.id.viewpager_classify)
     ViewPager viewpagerClassify;
     String[] titles={"ALL","休息视频","ANDROID","IOS","拓展资源","前端","瞎推荐"};
+    private ArrayList<Fragment> fragments;
 
     @Override
     protected int getLayoutResource() {
@@ -33,10 +34,10 @@ public class ClassifyFragment extends BaseFragment {
 
     @Override
     protected void onInitView(View view, Bundle savedInstanceState) {
-        ArrayList<Fragment> fragments=new ArrayList<>();
+        fragments = new ArrayList<>();
 
         for (int i=0;i<7;i++){
-            fragments.add(ContentFragment.getInsatance(i));
+            fragments.add(ContentFragment.getInstance(i));
         }
 
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -47,7 +48,7 @@ public class ClassifyFragment extends BaseFragment {
 
         viewpagerClassify.setOffscreenPageLimit(fragments.size());
 
-        viewpagerClassify.setAdapter(new ClassifyPagerAdapter(getFragmentManager(),getContext(),fragments,titles));
+        viewpagerClassify.setAdapter(new ClassifyPagerAdapter(getFragmentManager(),getContext(), fragments,titles));
 
         tablayout.setupWithViewPager(viewpagerClassify);
     }

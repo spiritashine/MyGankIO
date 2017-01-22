@@ -17,6 +17,7 @@ public class IClassifyConstraint {
         void onPull(List<ResultsBean> data);
         void onDrag(List<ResultsBean> data);
         void loadFinish();
+        void loadError(String msg);
     }
 
     public interface IPresenter{

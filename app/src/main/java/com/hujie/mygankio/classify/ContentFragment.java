@@ -25,7 +25,7 @@ public class ContentFragment extends BaseListFragment implements IClassifyConstr
     static String[] types={"all","休息视频","Android" ,"iOS" ,"拓展资源" ,"前端","瞎推荐"};
     private IClassifyConstraint.IPresenter presenter;
 
-    public static Fragment getInsatance(int i){
+    public static Fragment getInstance(int i){
         ContentFragment fragment = new ContentFragment();
         Bundle bundle=new Bundle();
         bundle.putInt("type",i);
@@ -41,22 +41,7 @@ public class ContentFragment extends BaseListFragment implements IClassifyConstr
     }
 
 
-    @Override
-    public void onPull(List<ResultsBean> data) {
-        mData.clear();
-        mData.addAll(data);
-    }
 
-    @Override
-    public void onDrag(List<ResultsBean> data) {
-        mData.addAll(data);
-    }
-
-    @Override
-    public void loadFinish() {
-        loadfinish();
-
-    }
 
     @Override
     protected RecyclerView.Adapter getAdapter(final RecyclerView mRecycleView) {
@@ -86,6 +71,28 @@ public class ContentFragment extends BaseListFragment implements IClassifyConstr
     @Override
     protected void addData() {
         presenter.drag();
+    }
+
+    @Override
+    public void onPull(List<ResultsBean> data) {
+        mData.clear();
+        mData.addAll(data);
+    }
+
+    @Override
+    public void onDrag(List<ResultsBean> data) {
+        mData.addAll(data);
+    }
+
+    @Override
+    public void loadFinish() {
+        loadfinish();
+        mStatusView.showContent();
+    }
+
+    @Override
+    public void loadError(String msg) {
+        mStatusView.showError(msg);
     }
 
 

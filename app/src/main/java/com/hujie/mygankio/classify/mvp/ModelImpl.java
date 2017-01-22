@@ -36,12 +36,7 @@ public class ModelImpl implements IClassifyConstraint.IModel{
                 }
             }
 
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
+             @Override
             public void onNext(List<ResultsBean> resultsBeen) {
                 super.onNext(resultsBeen);
                 if(callback!=null){

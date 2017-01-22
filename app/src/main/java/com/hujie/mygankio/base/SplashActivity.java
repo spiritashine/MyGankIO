@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.hujie.mygankio.classify.MainActivity;
-
 /**
  * Created by hujie on 2017/1/19.
  */

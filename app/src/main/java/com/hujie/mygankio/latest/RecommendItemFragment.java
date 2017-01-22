@@ -11,9 +11,6 @@ import com.hujie.mygankio.latest.mvp.RecommendPresenterImpl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by hujie on 2017/1/21.
- */
 
 public class RecommendItemFragment extends BaseListFragment implements RecommendConstraint.RecommendView {
 

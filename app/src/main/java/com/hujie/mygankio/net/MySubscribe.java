@@ -41,6 +41,11 @@ public abstract class MySubscribe<T> extends Subscriber<T> {
     public void onNext(T t) {
     }
 
+    @Override
+    public void onCompleted() {
+
+    }
+
     //统一处理异常  出现错误直接调用 自定义的 onError
     public abstract void onError(ExceptionHandle.ResponeThrowable e);
 

@@ -11,7 +11,7 @@ import com.hujie.mygankio.base.BaseFragment;
 import com.hujie.mygankio.base.StatusViewLayout;
 import com.hujie.mygankio.latest.mvp.RecommendConstraint;
 import com.hujie.mygankio.latest.mvp.RecommendPresenterImpl;
-import com.hujie.mygankio.classify.RotateTransformer;
+import com.hujie.mygankio.base.RotateTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
