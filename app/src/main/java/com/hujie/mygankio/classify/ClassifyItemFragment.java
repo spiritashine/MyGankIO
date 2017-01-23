@@ -10,6 +10,7 @@ import android.view.View;
 import com.hujie.mygankio.base.BaseListFragment;
 import com.hujie.mygankio.classify.mvp.IClassifyConstraint;
 import com.hujie.mygankio.classify.mvp.PresenterImpl;
+import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by hujie on 2017/1/13.
  */
 
-public class ContentFragment extends BaseListFragment implements IClassifyConstraint.IView{
+public class ClassifyItemFragment extends BaseListFragment implements IClassifyConstraint.IView{
 
     private ArrayList<ResultsBean> mData=new ArrayList<>();
     private int typeIndex;
@@ -26,7 +27,7 @@ public class ContentFragment extends BaseListFragment implements IClassifyConstr
     private IClassifyConstraint.IPresenter presenter;
 
     public static Fragment getInstance(int i){
-        ContentFragment fragment = new ContentFragment();
+        ClassifyItemFragment fragment = new ClassifyItemFragment();
         Bundle bundle=new Bundle();
         bundle.putInt("type",i);
         fragment.setArguments(bundle);
@@ -45,8 +46,8 @@ public class ContentFragment extends BaseListFragment implements IClassifyConstr
 
     @Override
     protected RecyclerView.Adapter getAdapter(final RecyclerView mRecycleView) {
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(getContext(), mData);
-        adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+        ClassifyRecyclerAdapter adapter = new ClassifyRecyclerAdapter(getContext(), mData);
+        adapter.setOnItemClickListener(new ClassifyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view) {
                 int position = mRecycleView.getChildAdapterPosition(view);

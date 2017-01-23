@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hujie.mygankio.R;
+import com.hujie.mygankio.javabean.ItemType;
+import com.hujie.mygankio.javabean.RecommmendBean;
 
 import java.util.ArrayList;
 
@@ -17,13 +19,13 @@ import java.util.ArrayList;
  * Created by hujie on 2017/1/21.
  */
 
-public class RecommmandAdapter extends RecyclerView.Adapter<RecommmandAdapter.RecommendHolder> {
+public class RecommmandRecyclerAdapter extends RecyclerView.Adapter<RecommmandRecyclerAdapter.RecommendHolder> {
 
     private final LayoutInflater inflater;
     private Context context;
     private ArrayList<ItemType> data;
 
-    public RecommmandAdapter(Context context, ArrayList<ItemType> data) {
+    public RecommmandRecyclerAdapter(Context context, ArrayList<ItemType> data) {
         this.context = context;
         this.data = data;
         inflater = LayoutInflater.from(context);

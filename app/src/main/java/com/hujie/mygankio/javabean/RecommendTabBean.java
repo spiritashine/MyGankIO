@@ -1,7 +1,7 @@
-package com.hujie.mygankio.latest;
+package com.hujie.mygankio.javabean;
 
 /**
- * Created by wanggang on 2017/1/20.
+ * Created by hujie on 2017/1/20.
  */
 
 public class RecommendTabBean {

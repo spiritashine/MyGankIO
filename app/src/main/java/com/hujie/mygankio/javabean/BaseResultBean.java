@@ -1,10 +1,10 @@
-package com.hujie.mygankio.base;
+package com.hujie.mygankio.javabean;
 
 /**
  * Created by hujie on 2017/1/16.
  */
 
-public class BaseResult<T> {
+public class BaseResultBean<T> {
 
     private boolean error;
     private T results;

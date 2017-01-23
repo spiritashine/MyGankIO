@@ -5,21 +5,17 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.hujie.mygankio.base.BaseListFragment;
-import com.hujie.mygankio.latest.mvp.RecommendConstraint;
+import com.hujie.mygankio.javabean.ItemType;
+import com.hujie.mygankio.latest.mvp.IRecommendConstraint;
 import com.hujie.mygankio.latest.mvp.RecommendPresenterImpl;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 
-public class RecommendItemFragment extends BaseListFragment implements RecommendConstraint.RecommendView {
+public class RecommendItemFragment extends BaseListFragment implements IRecommendConstraint.RecommendView {
 
     private ArrayList<ItemType> data = new ArrayList<>();
-
-
-    public RecommendItemFragment() {
-    }
-
 
     public static RecommendItemFragment getInstance(String title, String data) {
         Bundle args = new Bundle();
@@ -53,7 +49,7 @@ public class RecommendItemFragment extends BaseListFragment implements Recommend
 
     @Override
     protected RecyclerView.Adapter getAdapter(RecyclerView mRecycleView) {
-        return new RecommmandAdapter(getContext(), data);
+        return new RecommmandRecyclerAdapter(getContext(), data);
     }
 
     @Override
@@ -72,14 +68,11 @@ public class RecommendItemFragment extends BaseListFragment implements Recommend
         Bundle args = getArguments();
         String title = args.getString("title");
         String date = args.getString("date");
-
-        RecommendConstraint.RecommendPresenter presenter = new
+        IRecommendConstraint.RecommendPresenter presenter = new
                 RecommendPresenterImpl(this);
         presenter.loadContent(date, title);
     }
 
     @Override
-    protected void addData() {
-
-    }
+    protected void addData() {}
 }

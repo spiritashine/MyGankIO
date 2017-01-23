@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     DrawerLayout drawerLayout;
 
     private ClassifyFragment classifyFragment;
-    private FuliFragment fuliFragment;
     private RecommendFragment recommendFragment;
 
     @Override
@@ -70,11 +69,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 setBarBackgroundColor("#bbbbbb");
         recommendFragment = new RecommendFragment();
         classifyFragment = new ClassifyFragment();
-        fuliFragment = new FuliFragment();
         FragmentTransaction ft=  getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmemt_container, recommendFragment,"0");
         ft.add(R.id.fragmemt_container, classifyFragment,"1");
-        ft.add(R.id.fragmemt_container, fuliFragment,"2");
         ft.commit();
         navigation.selectTab(0);
         navigation.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
@@ -87,9 +84,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         break;
                     case 1:
                         transaction.show(classifyFragment);
-                        break;
-                    case 2:
-                        transaction.show(fuliFragment);
                         break;
                 }
                 transaction.commit();
@@ -106,25 +100,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     case 1:
                         transaction.hide(classifyFragment);
                         break;
-                    case 2:
-                        transaction.hide(fuliFragment);
-                        break;
                 }
                 transaction.commit();
             }
 
             @Override
             public void onTabReselected(int position) {
-//                FragmentTransaction transaction=  getSupportFragmentManager().beginTransaction();
-//                switch (position){
-//                    case 1:
-//                        transaction.show(classifyFragment);
-//                        break;
-//                    case 2:
-//                        transaction.show(fuliFragment);
-//                        break;
-//                }
-//                transaction.commit();
+
             }
         });
 

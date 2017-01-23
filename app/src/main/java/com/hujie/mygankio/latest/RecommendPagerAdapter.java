@@ -11,11 +11,11 @@ import java.util.ArrayList;
  */
 
 
-public class RecommendFragmentAdapter extends FragmentPagerAdapter {
+public class RecommendPagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<Fragment> fragments;
 
-    public RecommendFragmentAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
+    public RecommendPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }

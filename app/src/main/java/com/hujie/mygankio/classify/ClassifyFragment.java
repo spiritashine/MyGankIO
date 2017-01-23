@@ -37,7 +37,7 @@ public class ClassifyFragment extends BaseFragment {
         fragments = new ArrayList<>();
 
         for (int i=0;i<7;i++){
-            fragments.add(ContentFragment.getInstance(i));
+            fragments.add(ClassifyItemFragment.getInstance(i));
         }
 
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);

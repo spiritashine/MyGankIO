@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hujie.mygankio.R;
 import com.hujie.mygankio.base.TimeUtils;
+import com.hujie.mygankio.javabean.ResultsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
  * Created by hujie on 2017/1/13.
  */
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ClassifyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
     private ArrayList<ResultsBean> data;
     LayoutInflater inflater;
@@ -36,7 +38,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.listener=listener;
     }
 
-    public MyRecyclerViewAdapter(Context context, ArrayList<ResultsBean> data) {
+    public ClassifyRecyclerAdapter(Context context, ArrayList<ResultsBean> data) {
         this.context = context;
         this.data = data;
         inflater=LayoutInflater.from(context);
@@ -46,7 +48,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         //根据ViewType填充不同的布局
-        if (viewType==MyRecyclerViewAdapter.NO_IMG){
+        if (viewType== ClassifyRecyclerAdapter.NO_IMG){
             view=inflater.inflate(R.layout.item_no_img,parent,false);
             return new NoImgViewHolder(view);
         }else {
@@ -73,7 +75,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             String time = TimeUtils.getTime(createdAt);
             ((ImgViewHolder) holder).createdAt_img.setText(time);
             //Glide下载图片
-//            Glide.with(context).load(bean.getImages().get(0)).into(((ImgViewHolder) holder).img);
+            Glide.with(context).load(bean.getImages().get(0)).into(((ImgViewHolder) holder).img);
         }
     }
 
@@ -82,9 +84,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         //根据images是否为空设置ViewType
         List<String> images = data.get(position).getImages();
         if (images==null){
-            return MyRecyclerViewAdapter.NO_IMG;
+            return ClassifyRecyclerAdapter.NO_IMG;
         }else {
-            return MyRecyclerViewAdapter.WITH_IMG;
+            return ClassifyRecyclerAdapter.WITH_IMG;
         }
     }
 

@@ -1,4 +1,4 @@
-package com.hujie.mygankio.latest;
+package com.hujie.mygankio.javabean;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.hujie.mygankio.latest.mvp;
 
 import android.text.TextUtils;
-import com.hujie.mygankio.latest.ItemType;
-import com.hujie.mygankio.latest.RecommendTypeBean;
-import com.hujie.mygankio.latest.RecommmendBean;
+import com.hujie.mygankio.javabean.ItemType;
+import com.hujie.mygankio.javabean.RecommendTypeBean;
+import com.hujie.mygankio.javabean.RecommmendBean;
 import com.hujie.mygankio.net.NetResponse;
 
 import java.util.ArrayList;
@@ -13,13 +13,13 @@ import java.util.List;
  * Created by hujie on 2017/1/21.
  */
 
-public class RecommendPresenterImpl implements RecommendConstraint.RecommendPresenter {
+public class RecommendPresenterImpl implements IRecommendConstraint.RecommendPresenter {
 
 
-    private RecommendConstraint.RecommendView view;
-    private RecommendConstraint.RecommendModel model;
+    private IRecommendConstraint.RecommendView view;
+    private IRecommendConstraint.RecommendModel model;
 
-    public RecommendPresenterImpl(RecommendConstraint.RecommendView view) {
+    public RecommendPresenterImpl(IRecommendConstraint.RecommendView view) {
         this.view = view;
         this.model = new RecommendRxModelImpl();
     }
@@ -80,7 +80,7 @@ public class RecommendPresenterImpl implements RecommendConstraint.RecommendPres
                 List<RecommmendBean> ios = typeBean.getIOS();
                 handleTypeData(data, "iOS", ios);
 
-                //qiandan
+                //前端
                 List<RecommmendBean> qd = typeBean.get前端();
                 handleTypeData(data, "前端", qd);
 

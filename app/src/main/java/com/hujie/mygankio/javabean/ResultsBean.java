@@ -1,4 +1,4 @@
-package com.hujie.mygankio.classify;
+package com.hujie.mygankio.javabean;
 
 import java.util.List;
 

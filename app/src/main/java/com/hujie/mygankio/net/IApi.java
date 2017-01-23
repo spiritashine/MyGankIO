@@ -1,10 +1,10 @@
 package com.hujie.mygankio.net;
 
 
-import com.hujie.mygankio.base.BaseResult;
-import com.hujie.mygankio.classify.ResultsBean;
-import com.hujie.mygankio.latest.RecommendTabBean;
-import com.hujie.mygankio.latest.RecommendTypeBean;
+import com.hujie.mygankio.javabean.BaseResultBean;
+import com.hujie.mygankio.javabean.ResultsBean;
+import com.hujie.mygankio.javabean.RecommendTabBean;
+import com.hujie.mygankio.javabean.RecommendTypeBean;
 
 import java.util.List;
 
@@ -13,26 +13,39 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
+ * Retrofit接口
  * Created by hujie on 2017/1/13.
  */
 
 public interface IApi {
 
-
+    /**
+     * ClassifyPage
+     * @param type
+     * @param page
+     * @return
+     */
     @GET("data/{type}/20/{page}")
-    Observable<BaseResult<List<ResultsBean>>> listAllRx(
+    Observable<BaseResultBean<List<ResultsBean>>> listAllRx(
             @Path("type") String type,
             @Path("page") int page);
 
-
+    /**
+     * HomePageTitle
+     * @param size
+     * @return
+     */
     @GET("history/content/{size}/1")
-    Observable<BaseResult<List<RecommendTabBean>>> getTabRx(@Path("size") int size);
+    Observable<BaseResultBean<List<RecommendTabBean>>> getTabRx(
+            @Path("size") int size);
 
     /**
+     * HomePageContent
      * @param date 2015/08/07
      * @return
      */
     @GET("day/{date}")
-    Observable<BaseResult<RecommendTypeBean>> getRecommendRx(@Path("date") String date);
+    Observable<BaseResultBean<RecommendTypeBean>> getRecommendRx(
+            @Path("date") String date);
 
 }

@@ -7,7 +7,7 @@ import com.hujie.mygankio.net.NetResponse;
  * Created by hujie on 2017/1/21.
  */
 
-public class RecommendConstraint {
+public class IRecommendConstraint {
 
     public interface RecommendView {
         void showLoading();

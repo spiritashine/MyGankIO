@@ -5,10 +5,10 @@ import android.support.annotation.LayoutRes;
 import android.view.View;
 
 /**
+ * 懒加载
  * Created by hujie on 2017/1/16.
  */
 
-//懒加载
 public abstract class LazyFragment extends BaseFragment {
 
     protected boolean isCreated; //是否创建

@@ -2,7 +2,7 @@ package com.hujie.mygankio.classify.mvp;
 
 import android.content.Context;
 
-import com.hujie.mygankio.classify.ResultsBean;
+import com.hujie.mygankio.javabean.ResultsBean;
 import com.hujie.mygankio.net.NetResponse;
 
 import java.util.List;

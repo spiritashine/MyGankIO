@@ -1,4 +1,4 @@
-package com.hujie.mygankio.latest;
+package com.hujie.mygankio.javabean;
 
 /**
  * Created by hujie on 2017/1/21.
